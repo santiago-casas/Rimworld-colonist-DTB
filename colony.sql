@@ -1,15 +1,18 @@
+
 create table colonist (
-ID_colinist int(7) not null,
+ID_colonist int(7) not null,
 live_state ENUM('Alive','dead','cryogenized','gone') not null,
 FK_ID_colony int(5) not null,
 name varchar(20) not null,
 nickname varchar(20) not null,
-lastname varchar(20) not null
-primary key(ID_colinist, FK_ID_colony );
+lastname varchar(20) not null,
+primary key(ID_colonist, FK_ID_colony) 
+);
 
 create table colony(
-ID_colony int(12),
-nombre varchar(20)
+ID_colony int(5) not null,
+colony_name varchar(20) not null,
+primary key (ID_colony)
 );
 create table colonistjobs (
 FK_ID_colonist int(7) not null,
@@ -25,23 +28,23 @@ primary key (ID_job)
 
 create table C_identity (
 FK_ID_childhood int(3) not null,
-FK_ID_fatherhood int(3),
+FK_ID_adulthood int(3),
 crono_age int(4) not null,
 bio_age int(4) not null,
-sex ENUM('M','F'),
-FK_ID_colonist int(7),
-primary key (FK_ID_childhood, FK_ID_fatherhood)
+sex ENUM('M','F') not null,
+FK_ID_colonist int(7) not null,
+primary key (FK_ID_childhood, FK_ID_adulthood, FK_ID_colonist)
 );
 create table childhood(
 ID_childhood int(3) not null,
 childhood varchar(15) not null,
-description text,
+description text not null,
 primary key (ID_childhood)
 );
 create table adulthood(
-ID_adulthood int(3) not null,
+ID_adulthood int(3),
 adulthood varchar(15) not null,
-description text,
+description text not null,
 primary key (ID_adulthood)
 );
 create table cObject(
@@ -72,22 +75,26 @@ primary key (FK_ID_colonist)
 );
 
 create table traits(
-ID_colonist int(7),
-FK_ID_caracteristicas int(4),
-primary key(ID_colonist, FK_ID_caracteristicas)
+FK_ID_colonist int(7) not null,
+FK_ID_characteristics int(4) not null,
+primary key(FK_ID_colonist, FK_ID_characteristics)
 );
+
 create table type_traits(
 ID_characteristics int(4) not null,
 trait varchar(20) not null,
+description text not null,
 primary key (ID_characteristics)
 );
+
 create table gear (
 FK_ID_colonist int(7),
 FK_ID_pants int(2),
 FK_ID_headgear int(2),
 FK_ID_middle_layer int(2),
 FK_ID_MNOL int(2),
-FK_ID_waist_layer int(2)
+FK_ID_waist_layer int(2),
+PRIMARY KEY (FK_ID_colonist)
 );
 
 create table pants(
@@ -115,3 +122,29 @@ ID_waist_layer int(2) not null,
 waist_layer varchar(20) not null,
 primary key (ID_waist_layer)
 );
+
+ALTER TABLE colonist add foreign key (FK_ID_colony) references colony (ID_colony);
+
+ALTER TABLE c_identity ADD foreign key (FK_ID_childhood) references childhood (ID_childhood);
+ALTER TABLE c_identity ADD foreign key (FK_ID_adulthood) references adulthood(ID_adulthood);
+ALTER TABLE c_identity ADD foreign key (FK_ID_colonist) references colonist (ID_colonist);
+
+ALTER TABLE skills ADD FOREIGN KEY (FK_ID_colonist) references colonist (ID_colonist);
+
+ALTER TABLE cobject ADD FOREIGN KEY (FK_ID_tool) references tool (ID_tool);
+ALTER TABLE cobject ADD FOREIGN KEY (FK_ID_colonist) references colonist(ID_colonist);
+
+ALTER TABLE traits add FOREIGN KEY (FK_ID_colonist) references colonist(ID_colonist);
+
+ALTER TABLE colonistjobs add foreign key (FK_ID_colonist) References colonist(ID_colonist);
+
+ALTER TABLE gear add foreign key (FK_ID_colonist) references colonist(ID_colonist);
+ALTER TABLE gear add foreign key (FK_ID_pants) references pants(ID_pants);
+ALTER TABLE gear add foreign key (FK_ID_headgear) references headgear(ID_headgear);
+ALTER TABLE gear add foreign key (FK_ID_MNOL) references MNOL(ID_MNOL);
+ALTER TABLE gear ADD FOREIGN KEY (FK_ID_waist_layer) references waist_layer(ID_waist_layer);
+ALTER TABLE gear ADD FOREIGN KEY (FK_ID_middle_layer) references middle_layer(ID_middle_layer);
+
+
+ALTER TABLE  traits add foreign key (FK_ID_characteristics) references type_traits(ID_characteristics);
+ALTER TABLE colonistjobs ADD FOREIGN KEY (FK_ID_job) references jobs(ID_job);
