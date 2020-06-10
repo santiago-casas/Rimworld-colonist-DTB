@@ -1,4 +1,6 @@
 
+/*---its ok to many live state?---------*/
+
 insert into colony values
 (00001,'Colome','in use','military base'),
 (00002,'Meadowland','in use','factory'),
@@ -142,7 +144,7 @@ INSERT INTO type_traits VALUES
 (0069,'gourmand','NAMEs life revolves around food. PRONOUN gets hungry quickly, and if PRONOUN is in a bad mood, PRONOUN will often satisfy PRONOUN-self by eating.'),
 (0070,'Quick sleeper','	NAME doesnt need as much sleep as the average person. Whether PRONOUNs sleeping on a bed or on the ground, PRONOUN will be fully rested in about two thirds the usual time.')
 
-
+----aumentar mas los nombre------
 
 insert into jobs values
 (01,'jailor'),
@@ -162,6 +164,7 @@ insert into jobs values
 (15,'soldier'),
 (16,'leader'),
 (17,'diplomatic')
+
 
 insert into traits (FK_ID_colonist, FK_ID_characteristics) values
 (0000001,0070),
@@ -441,3 +444,53 @@ insert into skills values
 (0000028,06,10,01,01,01,02,10,05,12,04,10,01),
 (0000029,09,05,12,04,10,05,12,04,10,05,12,10),
 (0000030,null,null,05,12,04,10,05,12,04,10,05,12)
+
+INSERT INTO headgear values
+(1,'simple helmet'),
+(2,'flack helmet'),
+(3,'recon helmet'),
+(4,'marine helmet'),
+(5,'cataphract helmet'),
+(6,'Psyfocus helmet'),
+(7,'Psychic foil helmet'),
+(8,'cowboy hat'),
+(9,'bowler hat'),
+(10,'tribal headdress'),
+(11,'tuque'),
+(12,'war viel'),
+(13,'top hat'),
+(14,'ladies hat'),
+(15,'coronet crown')
+
+insert into middle_layer values
+(1,'flak vest')
+
+insert into waist_layer values
+(1,'shield belt'),
+(2,'smokepop belt')
+
+insert into mnol values
+(1,'Plate armor'),
+(2,'Flak jacket'),
+(3,'Recon armor'),
+(4,'Marine armor'),
+(5,'Cataphract armor'),
+(6,'Tribalwear'),
+(7,'Parka'),
+(8,'T-shirt'),
+(9,'Button-down shirt'),
+(10,'Duster'),
+(11,'Jacket'),
+(12,'Ruffle shirt'),
+(13,'Royal vest'),
+(14,'Royal robe'),
+(15,'Corset'),
+(16,'Psyfocus shirt'),
+(17,'Psyfocus vest'),
+(18,'Psyfocus robe')
+
+insert into pants values
+(1,'Flak pants'),
+(2,'Pants')
+
+/*add materials*/
