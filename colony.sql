@@ -4,16 +4,19 @@ ID_colonist int(7) not null,
 live_state ENUM('Alive','dead','cryogenized','gone') not null,
 FK_ID_colony int(5) not null,
 name varchar(20) not null,
-nickname varchar(20) not null,
+nickname varchar(20),
 lastname varchar(20) not null,
 primary key(ID_colonist, FK_ID_colony) 
 );
 
 create table colony(
 ID_colony int(5) not null,
-colony_name varchar(20) not null,
+colony_name varchar(35) not null,
+colony_state ENUM('abandoned','in use','taken','destroid') not null,
+funtion ENUM('military base','factory','mine','farm','werehouse') not null,
 primary key (ID_colony)
 );
+
 create table colonistjobs (
 FK_ID_colonist int(7) not null,
 FK_ID_job int(2) not null,
@@ -22,7 +25,7 @@ primary key(FK_ID_colonist, FK_id_job)
 
 create table jobs(
 ID_job int(2) not null,
-job varchar(15) not null,
+job varchar(25) not null,
 primary key (ID_job)
 );
 
@@ -37,13 +40,13 @@ primary key (FK_ID_childhood, FK_ID_adulthood, FK_ID_colonist)
 );
 create table childhood(
 ID_childhood int(3) not null,
-childhood varchar(15) not null,
+childhood varchar(25) not null,
 description text not null,
 primary key (ID_childhood)
 );
 create table adulthood(
 ID_adulthood int(3),
-adulthood varchar(15) not null,
+adulthood varchar(25) not null,
 description text not null,
 primary key (ID_adulthood)
 );
@@ -54,7 +57,7 @@ primary key (FK_ID_colonist, FK_ID_tool)
 );
 create table tool(
 ID_tool int(3) not null,
-tool varchar(20)not null,
+tool varchar(30)not null,
 primary key (ID_tool)
 );
 create table skills(
@@ -82,7 +85,7 @@ primary key(FK_ID_colonist, FK_ID_characteristics)
 
 create table type_traits(
 ID_characteristics int(4) not null,
-trait varchar(20) not null,
+trait varchar(30) not null,
 description text not null,
 primary key (ID_characteristics)
 );
@@ -122,6 +125,7 @@ ID_waist_layer int(2) not null,
 waist_layer varchar(20) not null,
 primary key (ID_waist_layer)
 );
+
 
 ALTER TABLE colonist add foreign key (FK_ID_colony) references colony (ID_colony);
 
